@@ -1,5 +1,23 @@
 '''  Artificial Neural Network (ANN)'''
 
+# We have the following breakdown for supervised v.s. unsupervised implementaions of Deep learning:
+# ---------------------------------------------------------------------------------------
+#           Supervised                           |           Unsupervised
+# -----------------------------------------------|---------------------------------------
+#   -> Artificial Neural Networks                |   -> Self-Organizing Maps
+#       - Used for Regression and Classification |       - Used for Feature Detection
+#   -> Convolutional Neural Networks             |   -> Deep Boltzmann Machines
+#       - Used for Computer Vision               |       - Used for Recommendation Systems
+#   -> Recurrent Neural Networks                 |   -> AutoEncoders
+#       - Used for Time Series Analysis          |       - Used for Recommendation Systems
+# ---------------------------------------------------------------------------------------
+
+# The main concept of Deep Learning is to mimic human brain and the parts of human brain we are interestes in are:
+#   - Temporal Lobe (represents the long-term memory - ANN(trained weights))
+#   - Occipital Lobe (represents vision - CNN)
+#   - Frontal Lobe (represents short-term memory - RNN) 
+#   - Parietal Lobe (represents sensation and perception and constructing a spatial co-ordination system)
+
 # ***** The Neuron *****
 # The main motive of Deep Learning is to mimc the way human brain works. In the human brain, the signal transmitting units are
 # the Neurons which conveys the message and helps in interpreting their meaining on hte basis of prior learning or connections
@@ -101,8 +119,7 @@
 # Step6: Repeat Steps 1 to 5 and update the weights after each observation (Reinforcement learning). Or: Repeat Steps 1 to
 #        5 but update the weights only after a batch of observation (Batch Learning).
 
-  
- # ---------------------- Part-1: Data Preprocessing -----------------------------------------------
+  # ---------------------- Part-1: Data Preprocessing -----------------------------------------------
 # Importing the libraries 
 import numpy as np
 import matplotlib.pyplot as plt
