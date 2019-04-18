@@ -33,3 +33,8 @@ Solutions:
     - Weight initialisation
     - Echo State Networks
     - Long Short-Term Memory Networks (LSTMs)
+
+<br>
+
+#### **LSTMs (Wrec = 1)**
+ 
