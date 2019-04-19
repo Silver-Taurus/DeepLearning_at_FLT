@@ -2,11 +2,14 @@
 
 import numpy as np
 import ann_utils
+import math
 
-class SimpleANN:
-    def __init__(self, layers_units, learning_rate, epochs, show_cost=False):
+class ANN:
+    def __init__(self, layers_units, learning_rate, lambda_, batch_size, epochs, show_cost=False):
         self.layers_units = layers_units
         self.alpha = learning_rate
+        self.l = lambda_
+        self.bs = batch_size
         self._epochs = epochs
         self.show_cost = show_cost
         self._train_acc = 0.0
@@ -19,8 +22,9 @@ class SimpleANN:
         self.W, self.b, self.Z, self.A, self.dWs, self.dbs = ann_utils.create(self.X, self.layers_units)
      
         for e in range(self._epochs):
-            self.W, self.b, self.Z, self.A, self.dWs, self.dbs, C = ann_utils.propagate(self.X, self.Y, self.W, self.b,
-                                                                                        self.Z, self.A, self.alpha,
+            self.W, self.b, self.Z, self.A, self.dWs, self.dbs, C = ann_utils.propagate(self.X, self.Y, self.W, self.b, self.Z, self.A, 
+                                                                                        self.alpha, self.l, self.bs, 
+                                                                                        math.ceil(self.X.shape[1] / self.bs),
                                                                                         self.dWs, self.dbs, len(self.layers_units))
             if self.show_cost:
                 print(f'Cost for Epoch-{e+1}: {C}')

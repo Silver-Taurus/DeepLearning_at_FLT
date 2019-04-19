@@ -1,4 +1,4 @@
-''' Using a 3-layer Simple Neural Network (for Binary Classification) '''
+''' Using a L-layer Simple Neural Network (for Binary Classification) '''
 
 # Importing the libraries
 import h5py

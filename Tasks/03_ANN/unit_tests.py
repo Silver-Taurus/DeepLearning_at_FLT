@@ -4,8 +4,6 @@ import numpy as np
 from copy import deepcopy
 import unittest
 from ann_utils import create, forward_propagation, loss_function, cost_function, backward_propagation, optimize
-import simple_ann
-import source
 
 class TestAnnUtils(unittest.TestCase):
     ''' Test Class to make the methods for testing the original methods
@@ -113,17 +111,17 @@ class TestAnnUtils(unittest.TestCase):
         check_dWs, check_dbs = self.test_backward_propagation()
         check_W = deepcopy(self.W)
         check_B = deepcopy(self.B)
-        
-        for num in range(self.sample_size):
-            self.W[num] = self.W[num] - self.learning_rate * self.dWs[num]
-            self.B[num] = self.B[num] - self.learning_rate * self.dbs[num]
+        self.W, self.B = optimize(self.W, self.B, self.learning_rate, self.dWs, self.dbs, self.layers)
+       
+        for num in range(self.layers):
             check_W[num] = check_W[num] - self.learning_rate * check_dWs[num]
             check_B[num] = check_B[num] - self.learning_rate * check_dbs[num]
         
         for val_W, val_Check_W, val_b, val_Check_b in zip(self.W, check_W, self.B, check_B):
             for v11, v21, v12, v22 in zip(val_W, val_Check_W, val_b, val_Check_b):
-                self.assertEqual(v11, v21)
-                self.assertEqual(v12, v22)
+                for We, CWe, Be, CBe in zip(v11, v21, v12, v22):
+                    self.assertEqual(We, CWe)
+                    self.assertEqual(Be, CBe)
 
 if __name__ == '__main__':
     unittest.main()
