@@ -5,7 +5,7 @@ Careful Weight Initialisation, Regularisation and Mini-Batch Gradient Descent'''
 import h5py
 import numpy as np
 import matplotlib.pyplot as plt
-from ann import ANN
+from ann import SequentialANN, Layer
 
 # Importing training dataset
 train_file = h5py.File('train_catvnoncat.h5', 'r')
@@ -31,8 +31,12 @@ train_set_y = train_targets.reshape((1, train_targets.shape[0]))
 test_set_y = test_targets.reshape((1, test_targets.shape[0]))
 
 # Initialising and Fitting the ANN
-ann = ANN(layers_units=[3, 2, 1], learning_rate=0.005, batch_size=16, epochs=2000, lambda_=1, show_cost=True)
-ann.fit(train_set_x, train_set_y)
+ann = SequentialANN()
+ann.add(Layer(units=3, activation='tanh', input_shape=12288))
+ann.add(Layer(units=2, activation='tanh'))
+ann.add(Layer(units=1, activation='sigmoid'))
+ann.compile_(optimizer='adam')
+ann.fit(features=train_set_x, targets=train_set_y, batch_size=16, epochs=500, learning_rate=0.005, beta1=0.8, beta2=0.9, lr_decay=10e-5)
 
 # Predicting the output on test_set_x
 y_pred = ann.predict(test_set_x)
