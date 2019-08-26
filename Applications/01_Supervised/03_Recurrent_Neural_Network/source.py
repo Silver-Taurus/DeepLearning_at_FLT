@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 # Importing the training set
-training_dataset = pd.read_csv('Google_Stock_Price_Train.csv')
+training_dataset = pd.read_csv('Train_Dataset.csv')
 trained_inputs = training_dataset.iloc[:, [1]].values
 
 # Feature Scaling (Normalisation)
@@ -62,7 +62,7 @@ regressor.fit(feature_memory, current_feature, batch_size=32, epochs=100)
 
 # ---------------------- Part-3: Making the predictions and visualising the results
 # Getting the real stock price at 2017
-testing_dataset = pd.read_csv('Google_Stock_Price_Test.csv')
+testing_dataset = pd.read_csv('Test_Dataset.csv')
 real_stock_price = testing_dataset.iloc[:, [1]].values
 
 # Getting the predicted stock price of 2017
@@ -73,10 +73,10 @@ test_feature_memory = np.reshape(test_feature_memory, (test_feature_memory.shape
 predicted_stock_price = features_sc.inverse_transform(regressor.predict(test_feature_memory))
 
 # Visualisation the results
-plt.plot(real_stock_price, color='red', label='Real Google Stock Price')
-plt.plot(predicted_stock_price, color='blue', label='Predicted Google Stock Price')
-plt.title('Google Stock Price Prediction')
+plt.plot(real_stock_price, color='red', label='Real Stock Price')
+plt.plot(predicted_stock_price, color='blue', label='Predicted Stock Price')
+plt.title('Stock Price Prediction')
 plt.xlabel('Time')
-plt.ylabel('Google Stock Price')
+plt.ylabel('Stock Price')
 plt.legend()
 plt.show()
